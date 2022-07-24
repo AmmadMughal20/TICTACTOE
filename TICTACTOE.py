@@ -128,7 +128,7 @@ def user_turn(list): #function to take user's input
     list_to_check = list[:]
     number_valid = turn_num_validity_check(turn_number, list_to_check) #calling function which checks if the entered number is possible in game.
     if number_valid == True:
-        return turn_number
+        return turn_number #In case a user input is wrong for the first time, the second time it doesn't returns the value of turn_number 
     else:
         print(f'{turn_number} Place if already taken!!!')
         user_turn(list)
@@ -151,8 +151,8 @@ def Game(list): #main game function
         computer_turn_number = computer_turn(list)
         list = computer_updatelist(list, computer_turn_number)
         box_print(list)
-        user_turn_number = user_turn(list)
-        list = user_updatelist(list, user_turn_number)
+        user_turn_number = user_turn(list) #!!!Error occurs here the second time the user_turn function runs returns 'None' in user_turn_number
+        list = user_updatelist(list, user_turn_number) 
         box_print(list)
 
 Game(list)
