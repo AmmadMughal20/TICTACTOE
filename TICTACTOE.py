@@ -143,7 +143,7 @@ def winnercheck(list): #function to check the winner of game.
     elif (list[0][0] == 'O' and (list[0][0]==list[0][1]==list[0][2])) or (list[1][0] == 'O' and (list[1][0]==list[1][1]==list[1][2])) or (list[2][0] == 'O' and (list[2][0]==list[2][1]==list[2][2])) or (list[0][0] == 'O' and (list[0][0]==list[1][0]==list[2][0])) or (list[0][1] == 'O' and (list[0][1]==list[1][1]==list[2][1])) or (list[0][2] == 'O' and (list[0][2]==list[1][2]==list[2][2])) or (list[0][0] == 'O' and (list[0][0]==list[1][1]==list[2][2])) or (list[0][2] == 'O' and (list[0][2]==list[1][1]==list[2][0])):
         winner = 'user'
     else:
-        winner = 'draw'
+        winner = 'None'
     return winner
 from random import randrange
 
@@ -152,13 +152,16 @@ list = [[1,2,3],[4,5,6],[7,8,9]]
 
 def Game(list): #main game function
     winner = winnercheck(list)
-    if winner != 'computer' or winner != 'user':
-        computer_turn_number = computer_turn(list)
-        list = computer_updatelist(list, computer_turn_number)
-        box_print(list)
-    user_turn_number = user_turn(list) #!!!Error occurs here the second time the user_turn function runs returns 'None' in user_turn_number
-    list = user_updatelist(list, user_turn_number) 
-    box_print(list)
+    while winner == 'None':
+        while winner != 'user':
+            computer_turn_number = computer_turn(list)
+            list = computer_updatelist(list, computer_turn_number)
+            box_print(list)
+            winnercheck(list)
+        while winner != 'computer':
+            user_turn_number = user_turn(list) #!!!Error occurs here the second time the user_turn function runs returns 'None' in user_turn_number
+            list = user_updatelist(list, user_turn_number) 
+            box_print(list)
 
 
 
